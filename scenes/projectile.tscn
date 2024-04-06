@@ -165,10 +165,10 @@ gravity_scale = 0.0
 script = ExtResource("1_1iscd")
 
 [node name="Texture" type="AnimatedSprite2D" parent="."]
-rotation = -3.86406
+rotation = -6.13591
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_5b5su")
-frame = 9
+frame = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rsw8s")
