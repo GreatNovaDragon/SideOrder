@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ficptemvmglj"]
 
-[ext_resource type="Script" path="res://scenes/levels/Map.gd" id="1_1iv1o"]
-[ext_resource type="Script" path="res://scenes/levels/Ink.gd" id="1_gwdka"]
+[ext_resource type="Script" path="res://scripts/Map.gd" id="1_1iv1o"]
+[ext_resource type="Script" path="res://scripts/Ink.gd" id="1_gwdka"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ec5k2"]
 size = Vector2(1920, 1080)
