@@ -1,13 +1,14 @@
 extends Area2D
 
-@export var speed = 400.0
-@export var inklevel = 100.0
-@export var hp = 100.0
-var speedmod = 1
-var joy_dir = 0.0
-var weapondir = 0.0
-var inkrecovery = 100.00 / 180.00
-var ink_deplete_refresh = false
+@export var speed = 4 * Global.Unit
+@export var ink_level = 100.0
+@export var HP = 100.0
+var speed_modifier = 1
+var joystick_direction = 0.0
+var weapon_direction = 0.0
+@export var ink_recovery = 100.00 / 180.00
+@export var ink_refresh = false
+@export var color: Color = Color.RED 
 
 var frames = 0
 
@@ -16,7 +17,7 @@ signal inklevel_change(ink: float)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$Weapon.color = color
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,39 +25,39 @@ func _process(delta):
 	pass
 	
 func _physics_process(delta):
-	if Input.is_action_pressed("weapon_shoot") && !ink_deplete_refresh:
+	if Input.is_action_pressed("weapon_shoot") && !ink_refresh:
 			$Weapon.shooting = true
-	if Input.is_action_just_pressed("weapon_shoot") && !ink_deplete_refresh:	
-			if inklevel > 0:
-				speedmod *= $Weapon.mobility
-	if Input.is_action_just_released("weapon_shoot") || inklevel <= 0:
+	if Input.is_action_just_pressed("weapon_shoot") && !ink_refresh:	
+			if ink_level > 0:
+				speed_modifier *= $Weapon.mobility
+	if Input.is_action_just_released("weapon_shoot") || ink_level <= 0:
 			$Weapon.shooting = false
-			speedmod = 1.0	
+			speed_modifier = 1.0	
 		
 	if !$Weapon.shooting :
-		change_inklevel(inkrecovery)
+		change_inklevel(ink_recovery)
 
 	
-	if ink_deplete_refresh && inklevel == 100:
-		ink_deplete_refresh = false
+	if ink_refresh && ink_level == 100:
+		ink_refresh = false
 		
 
 			
-	var goal_Accel = Vector2.ZERO
-	goal_Accel.y = Input.get_axis("move_up", "move_down")
-	goal_Accel.x = Input.get_axis("move_left", "move_right")
-	if goal_Accel.length() > 0:
-		position += goal_Accel.normalized() * speed * speedmod * delta
+	var movement_direction = Vector2.ZERO
+	movement_direction.y = Input.get_axis("move_up", "move_down")
+	movement_direction.x = Input.get_axis("move_left", "move_right")
+	if movement_direction.length() > 0:
+		position += movement_direction.normalized() * speed * speed_modifier * delta
 		
-	var joy_vector = Input.get_vector("weapon_dir_left", "weapon_dir_right", "weapon_dir_up", "weapon_dir_down")
+	var joystick_vector = Input.get_vector("weapon_dir_left", "weapon_dir_right", "weapon_dir_up", "weapon_dir_down")
 	
-	if joy_vector.length() > 0:
-		joy_dir = joy_vector.angle() + PI/2
+	if joystick_vector.length() > 0:
+		joystick_direction = joystick_vector.angle() + PI/2
 	
-	var mouse_dir = get_global_mouse_position().angle_to_point(position) - PI/2
+	var mouse_direction = get_global_mouse_position().angle_to_point(position) - PI/2
 	
-	weapondir = joy_dir
-	rotation = weapondir
+	weapon_direction = joystick_direction
+	rotation = weapon_direction
 
 
 
@@ -64,18 +65,15 @@ func _physics_process(delta):
 func start(pos):
 	position = pos
 
-func change_inklevel(ink):
-	if inklevel >= 100 && ink > 0:
-		inklevel = 100
+func change_inklevel(ink_change):
+	if ink_level >= 100 && ink_change > 0:
+		ink_level = 100
 		return
-	inklevel += ink
-	if inklevel < 0:
-		ink_deplete_refresh = true
-		inklevel = 0
-	inklevel_change.emit(inklevel)
-
-func get_inklevel():
-	return inklevel
+	ink_level += ink_change
+	if ink_level < 0:
+		ink_refresh = true
+		ink_level = 0
+	inklevel_change.emit(ink_level)
 
 
 func _on_weapon_used_ink(ink):

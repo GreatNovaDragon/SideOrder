@@ -9,6 +9,7 @@ radius = 236.0
 height = 542.0
 
 [node name="Player" type="Area2D"]
+scale = Vector2(0.1, 0.1)
 script = ExtResource("1_2sptl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

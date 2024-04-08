@@ -12,11 +12,14 @@ func _ready():
 func _process(delta):
 	pass
 	
-func _on_weapon_shoot(projectile, direction, location):
+func _on_weapon_shoot(projectile, direction, location, color):
 	var spawned_projectile = projectile.instantiate()
 	spawned_projectile.rotation = direction
 	spawned_projectile.position = location
+	spawned_projectile.color = color
 	add_child(spawned_projectile)
+	
+	
 	
 	
 

@@ -3,12 +3,13 @@ extends Node2D
 var shooting = false
 
 @export var weapon_frames = 6
-@export var ink_usage =  0.92
+@export var ink_usage =  0
 @export var projectile_scene: PackedScene
 @export var mobility = 0.288
+@export var color: Color = Color.RED
 
 signal used_ink(ink: float)
-signal shoot(projectile, direction, location)
+signal shoot(projectile, direction, location, color)
 
 
 var frame = 0
@@ -27,10 +28,13 @@ func _physics_process(delta):
 			$PING.play()
 			$PING.pitch_scale = 1 + randf_range(-0.1,0.1)
 			Input.start_joy_vibration(0, 0.5, 0, 0.1)
-			shoot.emit(projectile_scene,  global_rotation - PI/2, global_position)
+			shoot.emit(projectile_scene,  global_rotation - PI/2, global_position, color)
 			
 			used_ink.emit(ink_usage)
 			
+			
+func set_color(color: Color):
+	color = color
 
 
 		

@@ -1,26 +1,22 @@
-@tool
-extends RigidBody2D
+extends Area2D
 
-@export var shot_travel_speed = 55
-@export var shot_travel_speed_after_straight = 36
-@export var when_slowdown = 5
+@export var shot_travel_speed = Global.Unit * 22
+@export var shot_travel_speed_after_straight = Global.Unit * 14.495
+@export var when_slowdown =  5
+@export var size_scale: float = 1.0
+@export var color: Color = Color.RED
+@onready var frame = 0
 
-
-
-
-
-
-var frame = 0
+@onready var map: Node2D = $"/root/Main/Map"
 
 var velo = 0.0
 
 func _ready():
 	$Texture.frame = randi()%$Texture.sprite_frames.get_frame_count("default")
-	$Texture.rotation = randf_range(-2*PI, 2*PI)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	$Texture.set_scale(Vector2(size_scale, size_scale))
+	$CollisionShape2D.set_scale(Vector2(size_scale, size_scale))
+	$Texture.rotation -= rotation
+	modulate = color
 	
 func _physics_process(delta):
 	frame += 1
@@ -33,7 +29,15 @@ func _physics_process(delta):
 
 		
 	
-	linear_velocity = Vector2(velo*60, 0.0).rotated(rotation)
+	var velocity = Vector2(velo, 0.0).rotated(rotation)
+	position += velocity*delta
+	
+	if velocity.length() <= 0.1:
+		var text = $Texture.sprite_frames.get_frame_texture("default", $Texture.frame)
+		map.paint(text, global_position, color, size_scale)
+		queue_free()
+	
+
 
 
 
