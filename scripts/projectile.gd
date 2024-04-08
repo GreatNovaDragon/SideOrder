@@ -6,17 +6,15 @@ extends Area2D
 @export var size_scale: float = 1.0
 @export var color: Color = Color.RED
 @onready var frame = 0
-
+@export var splats : Array[Texture2D]
 @onready var map: Node2D = $"/root/Main/Map"
 
 var velo = 0.0
 
 func _ready():
-	$Texture.frame = randi()%$Texture.sprite_frames.get_frame_count("default")
-	$Texture.set_scale(Vector2(size_scale, size_scale))
-	$CollisionShape2D.set_scale(Vector2(size_scale, size_scale))
-	$Texture.rotation -= rotation
+	$Texture.texture = splats.pick_random()
 	modulate = color
+	scale = Vector2(size_scale, size_scale)
 	
 func _physics_process(delta):
 	frame += 1
@@ -33,7 +31,7 @@ func _physics_process(delta):
 	position += velocity*delta
 	
 	if velocity.length() <= 0.1:
-		var text = $Texture.sprite_frames.get_frame_texture("default", $Texture.frame)
+		var text = $Texture.texture
 		map.paint(text, global_position, color, size_scale)
 		queue_free()
 	

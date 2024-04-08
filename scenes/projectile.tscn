@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c8j2p43cgw5r1"]
+[gd_scene load_steps=39 format=3 uid="uid://c8j2p43cgw5r1"]
 
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_1iscd"]
 [ext_resource type="Texture2D" uid="uid://colw4tegnlvw3" path="res://art/graphical/splats/splat00.png" id="2_5lsjb"]
@@ -38,122 +38,6 @@
 [ext_resource type="Texture2D" uid="uid://7amo1qn1dk5d" path="res://art/graphical/splats/splat34.png" id="36_u4ua3"]
 [ext_resource type="Texture2D" uid="uid://nshsyc35afw5" path="res://art/graphical/splats/splat35.png" id="37_wlvqu"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_5b5su"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_5lsjb")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_5gl05")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_o432d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_ml7gi")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_4r2ve")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_ep0dp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_4bjqt")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_eiyho")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_ecw8x")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_mxwcb")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_30jhd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_0gra5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_evorh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_c1gmy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_l0hj5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_8f28a")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_fue05")
-}, {
-"duration": 1.0,
-"texture": ExtResource("19_wc0dk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_8dh6a")
-}, {
-"duration": 1.0,
-"texture": ExtResource("21_a2dht")
-}, {
-"duration": 1.0,
-"texture": ExtResource("22_hj2so")
-}, {
-"duration": 1.0,
-"texture": ExtResource("23_rsanw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_qt2l5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_5rl04")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_khmb1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("27_yqglp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_2a7ro")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_751a7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_2lrkl")
-}, {
-"duration": 1.0,
-"texture": ExtResource("31_d210k")
-}, {
-"duration": 1.0,
-"texture": ExtResource("32_idmgn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("33_c3tdu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("34_rbpf5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("35_xbylo")
-}, {
-"duration": 1.0,
-"texture": ExtResource("36_u4ua3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("37_wlvqu")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_23ril"]
 radius = 119.08
 
@@ -162,10 +46,9 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_1iscd")
 size_scale = 0.1
+splats = Array[Texture2D]([ExtResource("2_5lsjb"), ExtResource("3_5gl05"), ExtResource("4_o432d"), ExtResource("5_ml7gi"), ExtResource("6_4r2ve"), ExtResource("7_ep0dp"), ExtResource("8_4bjqt"), ExtResource("9_eiyho"), ExtResource("10_ecw8x"), ExtResource("11_mxwcb"), ExtResource("12_30jhd"), ExtResource("13_0gra5"), ExtResource("14_evorh"), ExtResource("15_c1gmy"), ExtResource("16_l0hj5"), ExtResource("17_8f28a"), ExtResource("18_fue05"), ExtResource("19_wc0dk"), ExtResource("20_8dh6a"), ExtResource("21_a2dht"), ExtResource("22_hj2so"), ExtResource("23_rsanw"), ExtResource("24_qt2l5"), ExtResource("25_5rl04"), ExtResource("26_khmb1"), ExtResource("27_yqglp"), ExtResource("28_2a7ro"), ExtResource("29_751a7"), ExtResource("30_2lrkl"), ExtResource("31_d210k"), ExtResource("32_idmgn"), ExtResource("33_c3tdu"), ExtResource("34_rbpf5"), ExtResource("35_xbylo"), ExtResource("36_u4ua3"), ExtResource("37_wlvqu")])
 
-[node name="Texture" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_5b5su")
-frame = 16
+[node name="Texture" type="Sprite2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_23ril")
