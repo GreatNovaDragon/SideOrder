@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ficptemvmglj"]
 
-[ext_resource type="Script" path="res://scripts/Map.gd" id="1_1iv1o"]
-[ext_resource type="Script" path="res://scripts/Ink.gd" id="1_gwdka"]
+[ext_resource type="Script" path="res://scripts/Map.cs" id="1_m3bn8"]
+[ext_resource type="Script" path="res://scripts/Ink.cs" id="2_v5s2w"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ec5k2"]
 size = Vector2(1920, 1080)
@@ -9,7 +9,7 @@ size = Vector2(1920, 1080)
 [sub_resource type="ImageTexture" id="ImageTexture_1o17v"]
 
 [node name="Map" type="Node2D"]
-script = ExtResource("1_1iv1o")
+script = ExtResource("1_m3bn8")
 
 [node name="Enviroment" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_ec5k2")
@@ -18,4 +18,4 @@ centered = false
 [node name="Ink" type="Sprite2D" parent="Enviroment"]
 texture = SubResource("ImageTexture_1o17v")
 centered = false
-script = ExtResource("1_gwdka")
+script = ExtResource("2_v5s2w")
