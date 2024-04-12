@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://tkd28pugl8ih"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_1rdmx"]
+[ext_resource type="Script" path="res://scripts/main.cs" id="1_0y5pe"]
 [ext_resource type="PackedScene" uid="uid://bwljupl0m5bcw" path="res://scenes/Player.tscn" id="1_nlgj0"]
 [ext_resource type="Script" path="res://scripts/Inklevel.gd" id="3_r4agh"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="4_1gghh"]
@@ -22,24 +22,13 @@ func _process(delta):
 "
 
 [node name="Main" type="Node"]
-script = ExtResource("1_1rdmx")
+script = ExtResource("1_0y5pe")
 
 [node name="Map" parent="." instance=ExtResource("4_vaotw")]
 
 [node name="Middle" type="Marker2D" parent="."]
 position = Vector2(544, 296)
 script = SubResource("GDScript_jtoxl")
-
-[node name="Player" parent="." instance=ExtResource("1_nlgj0")]
-
-[node name="Camera" type="Camera2D" parent="Player"]
-scale = Vector2(10, 10)
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.15
-drag_right_margin = 0.15
-script = ExtResource("4_1gghh")
 
 [node name="HUD_Layer" type="CanvasLayer" parent="."]
 
@@ -49,25 +38,7 @@ offset_bottom = 23.0
 text = "Ink Level: 100%"
 script = ExtResource("3_r4agh")
 
-[node name="Player2" parent="." instance=ExtResource("1_nlgj0")]
-color = Color(0.541176, 0.462745, 0.843137, 1)
+[node name="Player" parent="." instance=ExtResource("1_nlgj0")]
 
-[node name="Camera" type="Camera2D" parent="Player2"]
-scale = Vector2(10, 10)
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.15
-drag_right_margin = 0.15
+[node name="Camera2D" type="Camera2D" parent="Player"]
 script = ExtResource("4_1gghh")
-
-[connection signal="inklevel_change" from="Player" to="HUD_Layer/Inklevel" method="_on_player_inklevel_change"]
-[connection signal="shoot" from="Player/Weapon" to="." method="_on_weapon_shoot"]
-[connection signal="inklevel_change" from="Player2" to="HUD_Layer/Inklevel" method="_on_player_inklevel_change"]
-[connection signal="shoot" from="Player2/Weapon" to="." method="_on_weapon_shoot"]
-
-[editable path="Map"]
-[editable path="Player"]
-[editable path="Player/Weapon"]
-[editable path="Player2"]
-[editable path="Player2/Weapon"]

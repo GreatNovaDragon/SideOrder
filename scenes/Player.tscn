@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwljupl0m5bcw"]
 
-[ext_resource type="Script" path="res://scripts/Player.gd" id="1_2sptl"]
+[ext_resource type="Script" path="res://scripts/Player.cs" id="1_4dpln"]
+[ext_resource type="PackedScene" uid="uid://dajejs4xipx0p" path="res://scenes/BasicTestWeapon.tscn" id="2_b2pjb"]
 [ext_resource type="Texture2D" uid="uid://dfdxtqkuyeiku" path="res://art/graphical/octoicon.bmp" id="2_pa18f"]
-[ext_resource type="PackedScene" uid="uid://dajejs4xipx0p" path="res://scenes/weapon.tscn" id="3_xcgh5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7s1dw"]
 radius = 236.0
@@ -10,7 +10,8 @@ height = 542.0
 
 [node name="Player" type="Area2D"]
 scale = Vector2(0.1, 0.1)
-script = ExtResource("1_2sptl")
+script = ExtResource("1_4dpln")
+WeaponScene = ExtResource("2_b2pjb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pa18f")
@@ -18,7 +19,3 @@ texture = ExtResource("2_pa18f")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_7s1dw")
-
-[node name="Weapon" parent="." instance=ExtResource("3_xcgh5")]
-
-[connection signal="used_ink" from="Weapon" to="." method="_on_weapon_used_ink"]
