@@ -18,9 +18,6 @@ public partial class Ink : Sprite2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Draw()
     {
-        GD.Print("BLURGH");
-        GD.Print(splat_queue.Count);
-
         foreach (var s in splat_queue)
         {
             var splat = s.Item1;
@@ -47,8 +44,6 @@ public partial class Ink : Sprite2D
 
     public void Paint(Texture2D splat, Vector2I pos, Color color, float scale_splat)
     {
-        GD.Print(splat_queue.Count);
-        GD.Print("blap");
         var im = splat.GetImage();
         splat_queue.Add((im, pos, color, scale_splat));
 

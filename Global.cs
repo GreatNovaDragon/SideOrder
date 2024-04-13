@@ -2,5 +2,5 @@ using Godot;
 
 public partial class Global : Node
 {
-    public static int Unit = 200;
+    public const int Unit = 200;
 }
