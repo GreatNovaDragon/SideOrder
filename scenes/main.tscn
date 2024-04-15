@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://tkd28pugl8ih"]
+[gd_scene load_steps=8 format=3 uid="uid://tkd28pugl8ih"]
 
 [ext_resource type="Script" path="res://scripts/main.cs" id="1_0y5pe"]
 [ext_resource type="PackedScene" uid="uid://bwljupl0m5bcw" path="res://scenes/Player.tscn" id="1_nlgj0"]
 [ext_resource type="Script" path="res://scripts/Inklevel.gd" id="3_r4agh"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="4_1gghh"]
 [ext_resource type="PackedScene" uid="uid://ficptemvmglj" path="res://scenes/levels/demomap.tscn" id="4_vaotw"]
+[ext_resource type="Script" path="res://scenes/Label.gd" id="4_x37or"]
 
 [sub_resource type="GDScript" id="GDScript_jtoxl"]
 script/source = "extends Marker2D
@@ -38,7 +39,17 @@ offset_bottom = 23.0
 text = "Ink Level: 100%"
 script = ExtResource("3_r4agh")
 
+[node name="FPS" type="Label" parent="HUD_Layer"]
+offset_left = 1.0
+offset_top = 27.0
+offset_right = 42.0
+offset_bottom = 50.0
+text = "FPS 0"
+script = ExtResource("4_x37or")
+
 [node name="Player" parent="." instance=ExtResource("1_nlgj0")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 script = ExtResource("4_1gghh")
+
+[connection signal="InklevelChange" from="Player" to="HUD_Layer/Inklevel" method="_on_player_inklevel_change"]

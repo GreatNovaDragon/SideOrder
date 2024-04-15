@@ -10,6 +10,7 @@ public partial class Projectile : Area2D
     private double Velo;
 
     [Export] public double ShotTravelSpeed { get; set; } = 22;
+    [Export] public int BaseDamage = 36;
 
     [Export] public double ShotTravelSpeedAfterStraight { get; set; } = 14.495F;
 
