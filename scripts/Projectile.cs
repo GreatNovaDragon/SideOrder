@@ -4,13 +4,13 @@ using Godot.Collections;
 
 public partial class Projectile : Area2D
 {
+    [Export] public int BaseDamage = 36;
     private int Frame;
     private Map Map;
     private Texture2D SplatTexture;
     private double Velo;
 
     [Export] public double ShotTravelSpeed { get; set; } = 22;
-    [Export] public int BaseDamage = 36;
 
     [Export] public double ShotTravelSpeedAfterStraight { get; set; } = 14.495F;
 
@@ -44,8 +44,9 @@ public partial class Projectile : Area2D
         Frame++;
 
         if (Frame > WhenSlowdown) Velo -= Velo * 0.36f;
-        else if (Frame == WhenSlowdown) Velo = ShotTravelSpeedAfterStraight * Global.Unit;
-        else if (Frame == 1) Velo = ShotTravelSpeed * (float)Math.Sqrt(new Random().NextDouble()) * Global.Unit;
+        else if (Frame == WhenSlowdown) Velo = ShotTravelSpeedAfterStraight * Global.EngineSpeedMod * Global.Unit;
+        else if (Frame == 1)
+            Velo = ShotTravelSpeed * (float)Math.Sqrt(new Random().NextDouble()) * Global.EngineSpeedMod * Global.Unit;
 
         var velocity = new Vector2((float)Velo, 0.0f).Rotated(Rotation);
         Position += (float)delta * velocity;

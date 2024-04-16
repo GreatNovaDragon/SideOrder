@@ -7,6 +7,7 @@ public partial class Player : Area2D
     public delegate void InklevelChangeEventHandler(double ink);
 
     private Color Color = Color.Color8(255, 0, 0);
+    private int cooldown_end_Frame;
 
     private int Frame;
 
@@ -28,7 +29,6 @@ public partial class Player : Area2D
 
     private Weapon Weapon;
     private double WeaponDirection;
-    private int cooldown_end_Frame;
 
     [Export] private PackedScene WeaponScene;
 
@@ -43,31 +43,26 @@ public partial class Player : Area2D
     public override void _PhysicsProcess(double delta)
     {
         Frame++;
-        GD.Print(
-            $"Frame {Frame} CoolDownEndFrame {cooldown_end_Frame} true? {!Weapon.Shooting && Frame > cooldown_end_Frame}");
         if (Input.IsActionJustPressed("weapon_shoot") && !InkRefresh && InkLevel > 0) SpeedModifier *= Weapon.Mobility;
-        if (@Input.IsActionJustReleased("weapon_shoot") || InkLevel <= 0)
+        if (Input.IsActionJustReleased("weapon_shoot") || InkLevel <= 0)
         {
             Weapon.Shooting = false;
             GD.Print($"cooldown end {cooldown_end_Frame}");
             SpeedModifier = 1;
         }
 
-        if (Input.IsActionPressed("weapon_shoot"))
+        if (Input.IsActionJustReleased("weapon_shoot"))
             cooldown_end_Frame = Frame + Weapon.cooldown_before_reload * Engine.PhysicsTicksPerSecond / 60;
 
 
-        if (InkRefresh)
-        {
-            Weapon.Shooting = false;
-        }
+        if (InkRefresh) Weapon.Shooting = false;
 
         if (!Weapon.Shooting && Frame > cooldown_end_Frame)
             ChangeInklevel(InkRecovery * (Engine.PhysicsTicksPerSecond / 60.00));
-        
+
         if (InkRefresh && InkLevel == 100) InkRefresh = false;
         var MovementDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-        var SpeedTotal = (float)(Speed * SpeedModifier * (Engine.PhysicsTicksPerSecond / 60.00) * Global.Unit * delta);
+        var SpeedTotal = (float)(Speed * SpeedModifier * Global.EngineSpeedMod * Global.Unit * delta);
         if (MovementDirection.Length() > 0)
             Position += MovementDirection.Normalized() * new Vector2(SpeedTotal, SpeedTotal);
 
@@ -119,7 +114,7 @@ public partial class Player : Area2D
         Weapon = WeaponScene.Instantiate<Weapon>();
         Weapon.SetColor(Color);
         Weapon.Shoot += GetNode<main>("/root/Main").OnWeaponShoot;
-        Weapon.UsedInk += this.OnWeaponUsedInk;
+        Weapon.UsedInk += OnWeaponUsedInk;
         AddChild(Weapon);
     }
 }

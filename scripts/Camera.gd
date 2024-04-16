@@ -11,11 +11,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("scroll_in"):
-		goal_zoom *= 1 + scroll_sensitivity
-	if Input.is_action_just_pressed("scroll_out"):
-		goal_zoom /= 1 + scroll_sensitivity
-	if Input.is_action_just_pressed("scroll_reset"):
-		goal_zoom = 1
-
 	zoom = zoom.move_toward(Vector2(goal_zoom, goal_zoom), 1 + scroll_sensitivity)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("scroll_in"):
+		goal_zoom *= 1 + scroll_sensitivity
+	if event.is_action_pressed("scroll_out"):
+		goal_zoom /= 1 + scroll_sensitivity
+	if event.is_action_pressed("scroll_reset"):
+		goal_zoom = 1
