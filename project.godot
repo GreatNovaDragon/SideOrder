@@ -102,6 +102,7 @@ scroll_reset={
 [physics]
 
 common/physics_ticks_per_second=120
+2d/physics_engine="Box2D"
 
 [rendering]
 

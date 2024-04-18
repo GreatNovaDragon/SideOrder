@@ -70,7 +70,10 @@ public partial class Player : Area2D
         var JoystickVector = Input.GetVector("weapon_dir_left", "weapon_dir_right", "weapon_dir_up", "weapon_dir_down");
 
         if (JoystickVector.Length() > 0) JoystickDirection = JoystickVector.Angle() + Math.PI / 2;
-        Rotation = (float)JoystickDirection;
+        //Rotation = (float)JoystickDirection;
+        LookAt(GetGlobalMousePosition());
+        Rotation += (float)Math.PI / 2;
+        
         base._PhysicsProcess(delta);
     }
 
