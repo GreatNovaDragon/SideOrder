@@ -29,7 +29,8 @@ public partial class Ink : Sprite2D
             for (var y = 1; y < 256; y++)
             {
                 var c = splat.GetPixel(x, y);
-                if (c.A != 0) splat.SetPixel(x, y, color);
+                if (c.A != 0)
+                    splat.SetPixel(x, y, color);
             }
 
             splat.Resize(brush_size, brush_size);
