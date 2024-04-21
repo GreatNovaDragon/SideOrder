@@ -8,13 +8,7 @@ public partial class main : Node
         GetNode<Player>("Player").Start(GetNode<Marker2D>("Middle").Position);
     }
 
-    public void OnWeaponShoot(
-        PackedScene projectile,
-        float direction,
-        Vector2 position,
-        Color color,
-        float scale
-    )
+    public void OnWeaponShoot(PackedScene projectile, float direction, Vector2 position, Color color, float scale)
     {
         var spawned_projectile = projectile.Instantiate<Projectile>();
         spawned_projectile.Rotation = direction;

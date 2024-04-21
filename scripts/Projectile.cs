@@ -52,11 +52,7 @@ public partial class Projectile : Area2D
         else if (Frame == WhenSlowdown)
             Velo = ShotTravelSpeedAfterStraight * Global.EngineSpeedMod * Global.Unit;
         else if (Frame == 1)
-            Velo =
-                ShotTravelSpeed
-                * (float)Math.Sqrt(new Random().NextDouble())
-                * Global.EngineSpeedMod
-                * Global.Unit;
+            Velo = ShotTravelSpeed * (float)Math.Sqrt(new Random().NextDouble()) * Global.EngineSpeedMod * Global.Unit;
 
         var velocity = new Vector2((float)Velo, 0.0f).Rotated(Rotation);
         Position += (float)delta * velocity;

@@ -58,8 +58,7 @@ public partial class Player : Area2D
         }
 
         if (Input.IsActionJustReleased("weapon_shoot"))
-            cooldown_end_Frame =
-                Frame + Weapon.cooldown_before_reload * Engine.PhysicsTicksPerSecond / 60;
+            cooldown_end_Frame = Frame + Weapon.cooldown_before_reload * Engine.PhysicsTicksPerSecond / 60;
 
         if (InkRefresh)
             Weapon.Shooting = false;
@@ -70,18 +69,11 @@ public partial class Player : Area2D
         if (InkRefresh && InkLevel == 100)
             InkRefresh = false;
         var MovementDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-        var SpeedTotal = (float)(
-            Speed * SpeedModifier * Global.EngineSpeedMod * Global.Unit * delta
-        );
+        var SpeedTotal = (float)(Speed * SpeedModifier * Global.EngineSpeedMod * Global.Unit * delta);
         if (MovementDirection.Length() > 0)
             Position += MovementDirection.Normalized() * new Vector2(SpeedTotal, SpeedTotal);
 
-        var JoystickVector = Input.GetVector(
-            "weapon_dir_left",
-            "weapon_dir_right",
-            "weapon_dir_up",
-            "weapon_dir_down"
-        );
+        var JoystickVector = Input.GetVector("weapon_dir_left", "weapon_dir_right", "weapon_dir_up", "weapon_dir_down");
 
         if (JoystickVector.Length() > 0)
             JoystickDirection = JoystickVector.Angle() + Math.PI / 2;

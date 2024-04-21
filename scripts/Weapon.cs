@@ -56,12 +56,7 @@ public partial class Weapon : Node2D
         Frame++;
         if (Shooting)
             if (
-                Frame
-                    % (int)(
-                        WeaponFrames
-                        * Global.EngineSpeedMod
-                        * Math.Sqrt(Input.GetActionStrength("weapon_shoot"))
-                    )
+                Frame % (int)(WeaponFrames * Global.EngineSpeedMod * Math.Sqrt(Input.GetActionStrength("weapon_shoot")))
                 == 0
             )
             {
